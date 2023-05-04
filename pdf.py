@@ -9,8 +9,11 @@ base_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(base_dir)
 
 # Cria o caminho para o diretório que contém os arquivos PDF
-pdf_dir = os.path.join(parent_dir, 'severino-extract', 'reports', 'pdf')
-json_dir = os.path.join(parent_dir, 'severino-extract', 'reports', 'json')
+pdf_dir = os.path.join(parent_dir, 'extract', 'reports', 'pdf')
+json_dir = os.path.join(parent_dir, 'extract', 'reports', 'json')
+
+# Cria o caminho completo para o diretório trash/pdf
+trash_dir = os.path.join(parent_dir, 'extract', 'reports', 'trash', 'pdf')
 
 # Itera sobre todos os arquivos PDF na pasta
 for filename in os.listdir(pdf_dir):
@@ -41,3 +44,9 @@ for filename in os.listdir(pdf_dir):
         output_file = os.path.join(json_dir, f"{os.path.splitext(filename)[0]}.json")
         with open(output_file, "w", encoding="utf-8") as f:
             json.dump(data, f, ensure_ascii=False)
+        
+        # Cria o caminho completo para o arquivo PDF na pasta trash/pdf
+        trash_file = os.path.join(trash_dir, filename)
+
+        # Move o arquivo PDF para a pasta trash/pdf
+        os.rename(file, trash_file)
