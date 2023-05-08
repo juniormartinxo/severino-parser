@@ -1,6 +1,6 @@
 import os
 import json
-from PyPDF2 import PdfReader
+from pypdf import PdfReader
 
 # Obtém o diretório atual do arquivo em execução
 base_dir = os.path.dirname(os.path.abspath(__file__))
